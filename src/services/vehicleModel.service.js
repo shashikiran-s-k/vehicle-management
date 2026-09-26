@@ -4,6 +4,7 @@ const pool = require('../config/database');
 async function createVehicleModel(
   modelName,
   vehicleType,
+  image_url,
   createdUserId
 ) {
   const [users] = await pool.query(
@@ -18,6 +19,7 @@ async function createVehicleModel(
   return repository.createVehicleModel(
     modelName,
     vehicleType,
+    image_url,
     createdUserId
   );
 }
@@ -33,11 +35,13 @@ async function getVehicleModelById(id) {
 async function updateVehicleModel(
   id,
   modelName,
+  image_url,
   vehicleType
 ) {
   return repository.updateVehicleModel(
     id,
     modelName,
+    image_url,
     vehicleType
   );
 }

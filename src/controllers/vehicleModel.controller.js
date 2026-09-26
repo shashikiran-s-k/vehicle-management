@@ -5,6 +5,7 @@ async function createVehicleModel(req, res, next) {
     const {
       model_name,
       vehicle_type,
+       image_url,
       created_user_id
     } = req.body;
 
@@ -17,6 +18,7 @@ async function createVehicleModel(req, res, next) {
     const id = await service.createVehicleModel(
       model_name,
       vehicle_type,
+      image_url,
       created_user_id
     );
 
@@ -60,6 +62,7 @@ async function updateVehicleModel(req, res, next) {
   try {
     const {
       model_name,
+      image_url,
       vehicle_type
     } = req.body;
 
@@ -73,6 +76,7 @@ async function updateVehicleModel(req, res, next) {
       await service.updateVehicleModel(
         req.params.id,
         model_name,
+        image_url,
         vehicle_type
       );
 

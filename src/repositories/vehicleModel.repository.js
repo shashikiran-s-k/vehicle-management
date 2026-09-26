@@ -3,13 +3,14 @@ const pool = require('../config/database');
 async function createVehicleModel(
   modelName,
   vehicleType,
+  image_url,
   createdUserId
 ) {
   const [result] = await pool.query(
     `INSERT INTO vehicle_models
-      (model_name, vehicle_type, created_date, created_user_id)
-     VALUES (?, ?, NOW(), ?)`,
-    [modelName, vehicleType, createdUserId]
+      (model_name, vehicle_type,image_url, created_date, created_user_id)
+     VALUES (?, ?,?, NOW(), ?)`,
+    [modelName, vehicleType, image_url, createdUserId]
   );
 
   return result.insertId;
@@ -57,14 +58,16 @@ async function getVehicleModelById(id) {
 async function updateVehicleModel(
   id,
   modelName,
-  vehicleType
+  vehicleType,
+  image_url
 ) {
   const [result] = await pool.query(
     `UPDATE vehicle_models
      SET model_name = ?,
-         vehicle_type = ?
+         vehicle_type = ?,
+          image_url = ?
      WHERE id = ?`,
-    [modelName, vehicleType, id]
+    [modelName, vehicleType, image_url, id]
   );
 
   return result.affectedRows;
