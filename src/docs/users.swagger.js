@@ -1,11 +1,3 @@
-const express = require('express');
-
-const router = express.Router();
-
-const controller =
-  require('../controllers/user.controller');
-
-
 /**
  * @swagger
  * /api/v1/users:
@@ -36,13 +28,9 @@ const controller =
  *     responses:
  *       201:
  *         description: User created successfully
- */
-router.post('/', controller.createUser);
-
-
-/**
- * @swagger
- * /api/v1/users:
+ *       400:
+ *         description: Invalid request
+ *
  *   get:
  *     summary: Get all users
  *     tags:
@@ -51,8 +39,6 @@ router.post('/', controller.createUser);
  *       200:
  *         description: List of users
  */
-router.get('/', controller.getAllUsers);
-
 
 /**
  * @swagger
@@ -73,13 +59,7 @@ router.get('/', controller.getAllUsers);
  *         description: User found
  *       404:
  *         description: User not found
- */
-router.get('/:id', controller.getUserById);
-
-
-/**
- * @swagger
- * /api/v1/users/{id}:
+ *
  *   put:
  *     summary: Update user
  *     tags:
@@ -90,6 +70,7 @@ router.get('/:id', controller.getUserById);
  *         required: true
  *         schema:
  *           type: integer
+ *         example: 1
  *     requestBody:
  *       required: true
  *       content:
@@ -99,20 +80,19 @@ router.get('/:id', controller.getUserById);
  *             properties:
  *               name:
  *                 type: string
+ *                 example: John
  *               email:
  *                 type: string
+ *                 example: john@example.com
  *               role:
  *                 type: string
+ *                 example: ENGINEER
  *     responses:
  *       200:
  *         description: User updated successfully
- */
-router.put('/:id', controller.updateUser);
-
-
-/**
- * @swagger
- * /api/v1/users/{id}:
+ *       404:
+ *         description: User not found
+ *
  *   delete:
  *     summary: Delete user
  *     tags:
@@ -123,11 +103,10 @@ router.put('/:id', controller.updateUser);
  *         required: true
  *         schema:
  *           type: integer
+ *         example: 1
  *     responses:
  *       200:
  *         description: User deleted successfully
+ *       404:
+ *         description: User not found
  */
-router.delete('/:id', controller.deleteUser);
-
-
-module.exports = router;
